@@ -76,6 +76,7 @@ class ScreenUtilInit extends StatefulWidget {
     this.ensureScreenSize,
     this.responsiveWidgets,
     this.fontSizeResolver = FontSizeResolvers.width,
+    this.forceScale,
   }) : super(key: key);
 
   final ScreenUtilInitBuilder? builder;
@@ -86,6 +87,7 @@ class ScreenUtilInit extends StatefulWidget {
   final bool? ensureScreenSize;
   final RebuildFactor rebuildFactor;
   final FontSizeResolver fontSizeResolver;
+  final double? forceScale;
 
   /// The [Size] of the device in the design draft, in dp
   final Size designSize;
@@ -180,6 +182,7 @@ class _ScreenUtilInitState extends State<ScreenUtilInit>
           splitScreenMode: widget.splitScreenMode,
           minTextAdapt: widget.minTextAdapt,
           fontSizeResolver: widget.fontSizeResolver,
+          forceScale: widget.forceScale,
         );
 
         if (snapshot.connectionState == ConnectionState.done) {

@@ -18,6 +18,8 @@ class ScreenUtil {
   /// Size of the phone in UI Design , dp
   late Size _uiSize;
 
+  late double? _forceScale;
+
   ///屏幕方向
   late Orientation _orientation;
 
@@ -98,6 +100,7 @@ class ScreenUtil {
     bool? splitScreenMode,
     bool? minTextAdapt,
     FontSizeResolver? fontSizeResolver,
+    double? forceScale,
   }) {
     try {
       if (data != null)
@@ -126,7 +129,8 @@ class ScreenUtil {
       ..fontSizeResolver = fontSizeResolver ?? _instance.fontSizeResolver
       .._minTextAdapt = minTextAdapt ?? _instance._minTextAdapt
       .._splitScreenMode = splitScreenMode ?? _instance._splitScreenMode
-      .._orientation = orientation;
+      .._orientation = orientation
+      .._forceScale = forceScale;
 
     _instance._elementsToRebuild?.forEach((el) => el.markNeedsBuild());
   }
@@ -196,7 +200,8 @@ class ScreenUtil {
 
   /// 实际尺寸与UI设计的比例
   /// The ratio of actual width to UI design
-  double get scaleWidth => screenWidth / _uiSize.width;
+  double get scaleWidth =>
+      _forceScale != null ? _forceScale! : screenWidth / _uiSize.width;
 
   /// The ratio of actual height to UI design
   double get scaleHeight =>
